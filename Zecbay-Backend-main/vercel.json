@@ -1,0 +1,22 @@
+{
+    "builds": [
+      {
+        "src": "manage.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+      "src": "^/$",
+      "has": [{ "type": "host", "value": "admin.zecbay.com" }],
+      "status": 308,
+      "headers": {
+        "Location": "/admin/"
+      }
+      },
+      {
+        "src": "/(.*)",
+        "dest": "manage.py"
+      }
+    ]
+  }
