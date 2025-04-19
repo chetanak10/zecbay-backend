@@ -1,32 +1,31 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/**/*.ts", "use": "@vercel/node" }
+    {
+      "src": "api/**/*.ts",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "manage.py",
+      "use": "@vercel/python"
+    }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1.ts" }
-  ]
-}
-
-{
-    "builds": [
-      {
-        "src": "manage.py",
-        "use": "@vercel/python"
-      }
-    ],
-    "routes": [
-      {
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1.ts"
+    },
+    {
       "src": "^/$",
       "has": [{ "type": "host", "value": "admin.zecbay.com" }],
       "status": 308,
       "headers": {
         "Location": "/admin/"
       }
-      },
-      {
-        "src": "/(.*)",
-        "dest": "manage.py"
-      }
-    ]
-  }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "manage.py"
+    }
+  ]
+}
