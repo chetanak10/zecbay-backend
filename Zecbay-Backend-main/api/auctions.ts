@@ -1,16 +1,10 @@
-import { NowRequest, NowResponse } from '@vercel/node'
-import { db } from './lib/db'
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req: NowRequest, res: NowResponse) {
-  if (req.method === 'GET') {
-    try {
-      const auctions = await db.getAuctions()
-      res.setHeader('Access-Control-Allow-Origin', '*')
-      res.status(200).json({ auctions })
-    } catch (err) {
-      res.status(500).json({ error: 'Failed to fetch auctions' })
-    }
-  } else {
-    res.status(405).json({ error: 'Method Not Allowed' })
-  }
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  const auctions = [
+    { id: 1, title: 'Auction A', bids: 10 },
+    { id: 2, title: 'Auction B', bids: 5 }
+  ];
+
+  res.status(200).json(auctions);
 }
